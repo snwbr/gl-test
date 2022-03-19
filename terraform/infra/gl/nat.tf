@@ -4,7 +4,4 @@ module "gke_nat" {
   region      = var.region
   name        = "gke-nat"
   vpc_network = module.vpc.vpc_id
-  depends_on = [
-    module.vpc
-  ]
 }

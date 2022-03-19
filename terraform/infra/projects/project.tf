@@ -1,4 +1,17 @@
-module "project_snwbr-test" {
+module "gcp_project_service_usage" {
+  source  = "../../modules/project"
+  project = var.project
+  apis = [
+    "serviceusage.googleapis.com"
+  ]
+}
+
+resource "time_sleep" "wait_10_mins" {
+  depends_on      = [module.gcp_project_service_usage]
+  create_duration = "10m"
+}
+
+module "gcp_project" {
   source  = "../../modules/project"
   project = var.project
   apis = [
@@ -9,10 +22,10 @@ module "project_snwbr-test" {
     "compute.googleapis.com",
     "container.googleapis.com",
     "containerfilesystem.googleapis.com",
-    "containerregistry.googleapis.com",
+    #"containerregistry.googleapis.com",
     "iam.googleapis.com",
     "iamcredentials.googleapis.com",
-    "logging.googleapis.com",
+    #"logging.googleapis.com",
     "monitoring.googleapis.com",
     "oslogin.googleapis.com",
     "servicemanagement.googleapis.com",
@@ -20,5 +33,10 @@ module "project_snwbr-test" {
     "storage-api.googleapis.com",
     "storage-component.googleapis.com",
     "storage.googleapis.com",
+    "domains.googleapis.com",
+    "dns.googleapis.com",
+  ]
+  depends_on = [
+    time_sleep.wait_10_mins
   ]
 }

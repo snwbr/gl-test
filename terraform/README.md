@@ -5,21 +5,70 @@ This code serves as the IaC main source. It will spin up resources, GCP project'
 
 You need a valid `terraform-sa.json` in this folder (next to the README) containing a valid GCP service account. TODO: in real environments, one posibility for handling this file's location should be set as an environment variable and the contents be managed through the secrets management tool of chosing.
 
+## Prerequisites
+
+**NOTE:** Projects run to be done just during the first setting up.
+
+In addition to the `terraform-sa.json` service account key, you need to know that project's APIs should be enabled before running the rest of the code, in addition to any project specific resoruces, if any. Run this as the first terraform run:
+
+```
+cd infra/projects
+./tf.sh dev apply
+
+## Then, you can run the rest of the modules and resources
+cd ../infra/gl
+./tf.sh dev apply
+```
+
 ## Folders structure
 
 ```
-infra
-|_ gl
-   |_ tfvars
-   |  |_ dev.tfvars
-   |_ variables.tf
-   |_ providers.tf
-   |_ (more tf files)
-modules
-|_ gke
-|  |_ google_container_cluster.tf
-|  |_ (more tf files)
-|_ (mode modules)
+.
+├── README.md
+├── infra
+│   └── gl
+│       ├── backend.tf
+│       ├── firewall.tf
+│       ├── gke.tf
+│       ├── iap.tf
+│       ├── nat.tf
+│       ├── project.tf
+│       ├── providers.tf
+│       ├── service_accounts.tf
+│       ├── tf.sh -> ../../tf.sh
+│       ├── tfvars
+│       │   └── dev.tfvars
+│       ├── variables.tf
+│       └── vpc.tf
+├── modules
+│   ├── gke
+│   │   ├── google_container_cluster.tf
+│   │   ├── google_container_node_pool.tf
+│   │   ├── output.tf
+│   │   └── variables.tf
+│   ├── network
+│   │   ├── nat
+│   │   │   ├── google_compute_router.tf
+│   │   │   ├── google_compute_router_nat.tf
+│   │   │   ├── output.tf
+│   │   │   └── variables.tf
+│   │   ├── subnet
+│   │   │   ├── google_compute_subnetwork.tf
+│   │   │   ├── output.tf
+│   │   │   └── variables.tf
+│   │   └── vpc
+│   │       ├── google_compute_network.tf
+│   │       ├── output.tf
+│   │       └── variables.tf
+│   ├── project
+│   │   ├── google_project_service.tf
+│   │   └── variables.tf
+│   └── service-accounts
+│       ├── google_service_account.tf
+│       ├── outputs.tf
+│       └── variables.tf
+├── terraform-sa.json
+└── tf.sh
 ```
 
 ## Usage

@@ -1,0 +1,13 @@
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: snwbr.net
+  namespace: services
+spec:
+  dnsNames:
+    - snwbr.net
+  secretName: snwbr-net-tls
+  issuerRef:
+    name: ingress
+    kind: ClusterIssuer

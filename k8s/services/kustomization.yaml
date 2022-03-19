@@ -1,0 +1,5 @@
+resources:
+- cert-manager/base
+- traefik/base
+#- jenkins/base
+- sealedsecrets/base

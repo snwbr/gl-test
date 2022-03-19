@@ -21,7 +21,6 @@ gke_secondary_ip_range = [
   }
 ]
 
-
 ## GKE
 gke_create                 = true
 zone                       = "us-central1-c"
@@ -30,3 +29,35 @@ cluster_name               = "gl-challenge"
 gke_version                = "1.21.9-gke.1002"
 machine_type               = "e2-small"
 gke_tags                   = []
+
+## IAP
+iap_members = [
+  "user:dperezr1290@gmail.com",
+  "serviceAccount:terraform-sa@test-snwbr.iam.gserviceaccount.com"
+]
+
+## Reserved public addresses
+reserved_addresses = [
+  "34.133.83.182",
+]
+
+## DNS
+zone_name = "snwbr-net"
+domain    = "snwbr.net."
+dns_labels = {
+  tfmanaged = "true"
+}
+snwbr_net_records = [
+  {
+    type      = "A"
+    dns_entry = "snwbr.net."
+    data      = ["34.133.83.182"]
+    ttl       = 300
+  },
+  {
+    type      = "CNAME"
+    dns_entry = "ingress.snwbr.net."
+    data      = ["snwbr.net."]
+    ttl       = 300
+  }
+]

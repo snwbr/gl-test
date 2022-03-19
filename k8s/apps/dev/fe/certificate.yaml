@@ -1,0 +1,13 @@
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: hello-world
+  namespace: apps
+spec:
+  dnsNames:
+    - snwbr.net
+  secretName: hello-world-tls
+  issuerRef:
+    name: ingress
+    kind: ClusterIssuer

@@ -72,3 +72,33 @@ variable "gke_secondary_ip_range" {
   type    = list(map(string))
   default = []
 }
+
+variable "iap_members" {
+  type    = list(string)
+  default = []
+}
+
+variable "zone_name" {
+  type    = string
+  default = ""
+}
+
+variable "domain" {
+  type    = string
+  default = ""
+}
+
+variable "dns_labels" {
+  type    = map(string)
+  default = {}
+}
+
+variable "snwbr_net_records" {
+  type    = list(any)
+  default = null
+}
+
+variable "reserved_addresses" {
+  type    = list(any)
+  default = []
+}

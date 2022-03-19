@@ -13,10 +13,4 @@ module "gke" {
   gke_master_ipv4_cidr_block    = var.gke_master_ipv4_cidr_block
   cluster_secondary_range_name  = var.gke_secondary_ip_range[0]["secondary_ip_range_name"]
   services_secondary_range_name = var.gke_secondary_ip_range[1]["secondary_ip_range_name"]
-
-  depends_on = [
-    module.vpc,
-    module.gke_subnetwork,
-    module.sa-gke
-  ]
 }

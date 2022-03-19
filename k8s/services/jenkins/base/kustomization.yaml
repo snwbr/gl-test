@@ -1,0 +1,8 @@
+resources:
+- jenkins_crds.yaml
+- git_ssh_sealed_secret.yaml
+- ingressroute.yaml
+- jenkins_operator.yaml
+- jenkins_instance.yaml
+
+namespace: services

@@ -12,7 +12,4 @@ module "gke_subnetwork" {
   ip_cidr_range      = var.gke_cidr_range
   vpc_network        = module.vpc.vpc_id
   secondary_ip_range = var.gke_secondary_ip_range
-  depends_on = [
-    module.vpc
-  ]
 }

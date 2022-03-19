@@ -1,0 +1,4 @@
+resources:
+- controller.yaml
+
+namespace: kube-system

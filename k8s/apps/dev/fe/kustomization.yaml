@@ -1,0 +1,9 @@
+resources:
+- ../../base
+- certificate.yaml
+- deployment.yaml
+- service.yaml
+- ingressroute.yaml
+
+#namePrefix: dev-
+namespace: apps

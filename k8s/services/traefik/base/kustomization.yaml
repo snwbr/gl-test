@@ -1,0 +1,4 @@
+resources:
+- certificate.yaml
+
+namespace: services

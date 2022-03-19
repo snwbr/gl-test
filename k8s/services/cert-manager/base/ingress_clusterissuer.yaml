@@ -1,0 +1,21 @@
+---
+apiVersion: cert-manager.io/v1
+kind: ClusterIssuer
+metadata:
+  name: ingress
+  namespace: cert-manager
+spec:
+  acme:
+    email: oso12_90@hotmail.com
+    server: https://acme-v02.api.letsencrypt.org/directory
+    #disableAccountKeyGeneration: true
+    privateKeySecretRef:
+      name: lets-encrypt-private-key
+      key: private-key
+    solvers:
+    - http01:
+        ingress:
+          class: traefik
+      selector:
+        dnsZones:
+        - 'snwbr.net'
