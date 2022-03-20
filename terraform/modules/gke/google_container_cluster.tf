@@ -34,4 +34,15 @@ resource "google_container_cluster" "primary" {
   master_authorized_networks_config {
   }
 
+  cluster_autoscaling {
+    enabled = true
+    resource_limits {
+      resource_type = "cpu"
+      maximum       = 8
+    }
+    resource_limits {
+      resource_type = "memory"
+      maximum       = 12
+    }
+  }
 }

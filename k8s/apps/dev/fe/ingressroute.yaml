@@ -2,20 +2,31 @@
 apiVersion: traefik.containo.us/v1alpha1
 kind: IngressRoute
 metadata:
-  name: hello-world
-  namespace: apps
+  name: hello-world-http
 spec:
   entryPoints:
     - web
+  routes:
+      ## Default fallback goes to FE
+    - match: HostRegexp(`snwbr.net`, `{subdomain:[a-z]+}.snwbr.net`)
+      kind: Rule
+      priority: 1
+      services:
+      - name: hello-world
+        port: 8080
+      middlewares:
+      - name: redirectscheme
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: hello-world-https
+spec:
+  entryPoints:
     - websecure
   routes:
-    - match: Host(`snwbr.net`)
-      kind: Rule
-      services:
-        - name: hello-world
-          port: 8080
       ## Default fallback goes to FE
-    - match: PathPrefix(`/`) 
+    - match: HostRegexp(`snwbr.net`, `{subdomain:[a-z]+}.snwbr.net`)
       kind: Rule
       priority: 1
       services:
@@ -34,5 +45,16 @@ metadata:
   name: redirectregex
 spec:
   redirectRegex:
-    regex: ^https://(.*)snwbr.net/(.*)
+    regex: ^https?://(.+)snwbr.net/?(.*)
     replacement: https://snwbr.net/${2}
+    permanent: true
+---
+## Redirect HTTP requests to HTTPS
+apiVersion: traefik.containo.us/v1alpha1
+kind: Middleware
+metadata:
+  name: redirectscheme
+spec:
+  redirectScheme:
+    scheme: https
+    permanent: true

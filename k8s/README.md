@@ -136,22 +136,9 @@ sudo tar -xzvf kubeseal-0.17.3-linux-amd64.tar.gz -C /usr/bin/ kubeseal
 In order to seal a secret, do as follows:
 
 ```
-echo -n bar | kubectl create secret generic mysecret --dry-run=client --from-file=foo=/dev/stdin -o json >mysecret.json
-kubeseal <mysecret.json >mysealedsecret.json
+echo -n bar | kubectl create secret generic mysecret --dry-run=client --from-file=foo=/dev/stdin > mysecret.yaml
+kubeseal -f mysecret.yaml -oyaml > mysealedsecret.yaml
 
 ## then you can apply it to k8s and save the file in the repo
-kubectl create -f mysealedsecret.json
-```
-
-However, since we're working with a private cluster for security reasons, you need to retrieve the controller's certificate to seal the secrets. The certificate is printed to the controller's logs, which you can see by doing:
-
-```
-kubectl logs -n kube-system $(kubectl get pods -n kube-system | grep sealed-secrets | awk '{print $1}')
-```
-
-Once you get it, save it somewhere and refer to it when running `kubeseal`:
-
-```
-## taking advantage of the example to show how to export to yaml instead of json, if preffered
-cat mysecret.json | kubeseal -o yaml --cert=cert.pem > mysealedsecret.yaml
+kubectl create -f mysealedsecret.yaml
 ```

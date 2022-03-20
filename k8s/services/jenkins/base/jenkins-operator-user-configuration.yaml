@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: jenkins-operator-user-configuration
+data:
+  1-test_credentials.groovy: | 
+    import jenkins.*
+    import jenkins.model.*
+    import hudson.*
+    import hudson.model.*
+    Jenkins jenkins = Jenkins.getInstance()
+    
+    println(secrets['gcp_sa_key'])
