@@ -33,6 +33,10 @@ spec:
       version: "0.20"
     - name: workflow-multibranch
       version: "706.vd43c65dec013"
+    - name: ansicolor
+      version: "1.0.1"
+    - name: timestamper
+      version: "1.17"
     containers:
       - name: jenkins-master
         image: jenkins/jenkins:2.319.1-lts-alpine

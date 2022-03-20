@@ -5,6 +5,7 @@ def manifests_folders = [
     "apps/dev",
     "services",
 ] as String[]
+def ci = "tfpod-${UUID.randomUUID().toString()}"
 
 podTemplate(
   label: ci,
