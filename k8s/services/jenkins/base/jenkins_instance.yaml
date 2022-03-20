@@ -18,7 +18,7 @@ spec:
     disableCSRFProtection: false
     basePlugins:
     - name: kubernetes
-      version: "1.30.11"
+      version: "1.31.3"
     - name: workflow-job
       version: "2.42"
     - name: workflow-aggregator

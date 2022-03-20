@@ -21,14 +21,16 @@ podTemplate(
           try {
             container('kustomize') {
               stage('CI - Generate K8s manifests from templates') {
-                for (folder in manifests_folders) {
-                  sh("kustomize build ${folder} > ${folder.replaceAll("/", "-")}.yaml")
+                dir("k8s"){
+                  for (folder in manifests_folders) {
+                    sh("/app/kustomize build ${folder} > ${folder.replaceAll("/", "-")}.yaml")
+                  }
                 }
               } // stage end
             }
             container('kustomize') {
               stage('CI - Validate K8s manifests') {
-                sh("kubeval --ignore-missing-schemas ./*")
+                sh("kubeval --ignore-missing-schemas k8s/*")
               } // stage end
             }
           } catch(err) {
