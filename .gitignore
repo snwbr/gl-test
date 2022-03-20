@@ -6,7 +6,7 @@ ignore.*
 *.tfstate
 *.tfstate.*
 .terraform*
-
+kustomize
 # Crash log files
 crash.log
 
