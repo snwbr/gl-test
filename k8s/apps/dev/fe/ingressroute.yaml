@@ -11,9 +11,9 @@ spec:
     - match: HostRegexp(`snwbr.net`, `{subdomain:[a-z]+}.snwbr.net`)
       kind: Rule
       priority: 1
-      services:
-      - name: hello-world
-        port: 8080
+      # services:
+      # - name: hello-world
+      #   port: 8080
       middlewares:
       - name: redirectscheme
 ---

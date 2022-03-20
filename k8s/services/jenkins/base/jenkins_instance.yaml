@@ -22,7 +22,7 @@ spec:
     - name: workflow-job
       version: "2.42"
     - name: workflow-aggregator
-      version: "2.6"
+      version: "2.7"
     - name: git
       version: "4.10.0"
     - name: job-dsl
@@ -37,6 +37,9 @@ spec:
       - name: jenkins-master
         image: jenkins/jenkins:2.319.1-lts-alpine
         imagePullPolicy: IfNotPresent
+        env:
+          - name: JENKINS_OPTS
+            value: --prefix=/jenkins
         livenessProbe:
           failureThreshold: 12
           httpGet:
@@ -60,9 +63,9 @@ spec:
         resources:
           limits:
             cpu: 1500m
-            memory: 3Gi
+            memory: 1Gi
           requests:
-            cpu: "1"
+            cpu: 100m
             memory: 256Mi
   seedJobs:
     - id: jenkins-operator
@@ -71,4 +74,4 @@ spec:
       targets: "cicd/jobs/*.jenkins"
       description: "Main Gorilla Logic Challenge repository"
       repositoryBranch: main
-      repositoryUrl: https://github.com/snwbr/gl-test.git
+      repositoryUrl: git@github.com:snwbr/gl-test.git

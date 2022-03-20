@@ -59,5 +59,11 @@ snwbr_net_records = [
     dns_entry = "ingress.snwbr.net."
     data      = ["snwbr.net."]
     ttl       = 300
+  },
+  {
+    type      = "CNAME"
+    dns_entry = "jenkins.snwbr.net."
+    data      = ["snwbr.net."]
+    ttl       = 300
   }
 ]
