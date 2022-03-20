@@ -21,6 +21,7 @@ podTemplate(
           try {
             container('kustomize') {
               stage('CI - Generate K8s manifests from templates') {
+                checkout scm
                 dir("k8s"){
                   for (folder in manifests_folders) {
                     sh("/app/kustomize build ${folder} > ${folder.replaceAll("/", "-")}.yaml")
