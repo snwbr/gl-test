@@ -29,9 +29,11 @@ podTemplate(
                 }
               } // stage end
             }
-            container('kustomize') {
+            container('kubeval') {
               stage('CI - Validate K8s manifests') {
-                sh("/kubeval --ignore-missing-schemas k8s/*")
+                sh("""
+                  /kubeval --ignore-missing-schemas k8s/*.yaml
+                  """)
               } // stage end
             }
           } catch(err) {
