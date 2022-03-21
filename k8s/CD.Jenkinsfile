@@ -60,7 +60,7 @@ podTemplate(
               stage('CD - Deploying Kustomize templates') {
                 sh("kubectl apply -f k8s/services.yaml")
                 sleep(time:30,unit:"SECONDS")
-                sh("kubectl apply -f k8s-apps.yaml")
+                sh("kubectl apply -f k8s/apps-dev.yaml")
               } // stage end
             }
           } catch(err) {
