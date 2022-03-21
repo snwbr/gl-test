@@ -1,6 +1,6 @@
 resources:
 - jenkins_crds.yaml
-- jenkins-operator-user-configuration.yaml
+#- jenkins-operator-user-configuration.yaml
 - gcp-sa.yaml
 - git-gl-test-ssh.yaml
 - ingressroute.yaml

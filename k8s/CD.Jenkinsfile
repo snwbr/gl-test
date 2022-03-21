@@ -34,8 +34,7 @@ podTemplate(
             }
             container('gcloud') {
               stage('CD - Get Google credentials') {
-                withCredentials([file(credentialsId: 'gcp_sa_key', variable: 'gcp_sa_key')]) {
-                  print "${gcp_sa_key}"
+                withCredentials([file(credentialsId: 'gcp-sa-key', variable: 'gcp_sa_key')]) {
                   sh("""
                     gcloud auth activate-service-account --key-file=${gcp_sa_key}
                     gcloud container clusters get-credentials dev-gke --region us-central1 --project test-snwbr

@@ -4,8 +4,8 @@ metadata:
   name: master
 spec:
   configurationAsCode:
-    configurations:
-      - name: jenkins-operator-user-configuration
+    configurations: []
+#      - name: jenkins-operator-user-configuration
     secret:
       name: ""
   groovyScripts:
@@ -20,7 +20,7 @@ spec:
     - name: kubernetes
       version: "1.31.3"
     - name: workflow-job
-      version: "2.42"
+      version: "1145.v7f2433caa07f"
     - name: workflow-aggregator
       version: "2.7"
     - name: git
@@ -40,7 +40,7 @@ spec:
     - name: credentials
       version: "2.6.2"
     - name: pipeline-stage-view
-      version: "2.23"
+      version: "2.22"
     containers:
       - name: jenkins-master
         image: jenkins/jenkins:2.319.1-lts-alpine

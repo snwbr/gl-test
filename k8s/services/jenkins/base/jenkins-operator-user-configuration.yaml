@@ -10,6 +10,6 @@ data:
         - credentials:
           - file:
               scope: GLOBAL
-              id: "gcp_sa_key"
-              fileName: "gcp_sa_key.json"
-              secretBytes: "${base64:${readFile:${gcp_sa_key.json}}}"
+              id: "gcp-sa-key"
+              fileName: "gcp-sa-key"
+              secretBytes: "${base64:${readFile:${gcp-sa-key}}}"
