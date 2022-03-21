@@ -20,8 +20,10 @@ podTemplate(
         node(ci) {
           try {
             container('kustomize') {
-              stage('CI - Generate K8s manifests from templates') {
+              stage('Git checkout') {
                 checkout scm
+              }
+              stage('CI - Generate K8s manifests from templates') {
                 dir("k8s"){
                   for (folder in manifests_folders) {
                     sh("/app/kustomize build ${folder} > ${folder.replaceAll("/", "-")}.yaml")
