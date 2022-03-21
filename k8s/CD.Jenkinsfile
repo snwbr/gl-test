@@ -34,12 +34,14 @@ podTemplate(
             }
             container('gcloud') {
               stage('CD - Get Google credentials') {
-                gcp_sa_key = credentials('gcp_sa_key.json')
-                sh("""
-                  gcloud auth activate-service-account --key-file=$gcp_sa_key
-                  gcloud container clusters get-credentials dev-gke --region us-central1 --project test-snwbr
-                  kubectl apply -f k8s/common.yaml
-                  """)
+                withCredentials([file(credentialsId: 'gcp_sa_key', variable: 'gcp_sa_key')]) {
+                  print "${gcp_sa_key}"
+                  sh("""
+                    gcloud auth activate-service-account --key-file=${gcp_sa_key}
+                    gcloud container clusters get-credentials dev-gke --region us-central1 --project test-snwbr
+                    kubectl apply -f k8s/common.yaml
+                    """)
+                }
               } // stage end
             }
             container('helm') {
