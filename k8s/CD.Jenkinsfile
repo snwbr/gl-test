@@ -35,30 +35,32 @@ podTemplate(
             container('gcloud') {
               stage('CD - Get Google credentials') {
                 withCredentials([file(credentialsId: 'gcp-sa-key', variable: 'gcp_sa_key')]) {
-                  sh("""
-                    gcloud auth activate-service-account --key-file=${gcp_sa_key}
+                  sh('''
+                    gcloud auth activate-service-account --key-file=$gcp_sa_key
                     gcloud container clusters get-credentials dev-gke --region us-central1 --project test-snwbr
                     kubectl apply -f k8s/common.yaml
-                    """)
+                    cp /root/.kube/config .
+                    ''')
                 }
               } // stage end
             }
             container('helm') {
               stage('CD - Deploying Helm apps') {
                 sh("""
-                  helm upgrade --install \
+                  helm repo add traefik https://helm.traefik.io/traefik
+                  helm upgrade --install --kubeconfig=config \
                     --namespace=services \
                     --values=k8s/services/traefik/helm_values.yaml \
-                    traefik traefik/traefik
-                  """)
-                  sleep(time:15,unit:"SECONDS")
+                    traefik traefik/traefik --version 10.15.0
+                """)
+                sleep(time:15,unit:"SECONDS")
               } // stage end
             }
             container('gcloud') {
               stage('CD - Deploying Kustomize templates') {
                 sh("kubectl apply -f k8s/services.yaml")
                 sleep(time:30,unit:"SECONDS")
-                sh("kubectl apply -f k8s/apps.yaml")
+                sh("kubectl apply -f k8s-apps.yaml")
               } // stage end
             }
           } catch(err) {
