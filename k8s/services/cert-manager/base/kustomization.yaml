@@ -1,5 +1,3 @@
 resources:
 - cert-manager.yaml
 - ingress_clusterissuer.yaml
-
-namespace: cert-manager

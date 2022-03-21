@@ -3,11 +3,13 @@ kind: ConfigMap
 metadata:
   name: jenkins-operator-user-configuration
 data:
-  1-test_credentials.groovy: | 
-    import jenkins.*
-    import jenkins.model.*
-    import hudson.*
-    import hudson.model.*
-    Jenkins jenkins = Jenkins.getInstance()
-    
-    println(secrets['gcp_sa_key'])
+  1-credentials.yaml: |
+    credentials:
+      system:
+        domainCredentials:
+        - credentials:
+          - file:
+              scope: GLOBAL
+              id: "gcp_sa_key"
+              fileName: "gcp_sa_key.json"
+              secretBytes: "${base64:${readFile:${gcp_sa_key.json}}}"

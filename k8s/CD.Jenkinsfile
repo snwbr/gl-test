@@ -20,15 +20,41 @@ podTemplate(
         node(ci) {
           try {
             container('kustomize') {
-              stage('CI - Generate K8s manifests from templates') {
-                for (folder in manifests_folders) {
-                  sh("kustomize build ${folder} > ${folder.replaceAll("/", "-")}.yaml")
+              stage('CD - Generate K8s manifests from templates') {
+                checkout scm
+                dir("k8s"){
+                  for (folder in manifests_folders) {
+                    sh("/app/kustomize build ${folder} > ${folder.replaceAll("/", "-")}.yaml")
+                  }
                 }
               } // stage end
             }
-            container('kustomize') {
-              stage('CI - Validate K8s manifests') {
-                sh("kubeval --ignore-missing-schemas ./*")
+            container('gcloud') {
+              stage('CD - Get Google credentials') {
+                gcp_sa_key = credentials('gcp_sa_key.json')
+                sh("""
+                  gcloud auth activate-service-account --key-file=$gcp_sa_key
+                  gcloud container clusters get-credentials dev-gke --region us-central1 --project test-snwbr
+                  kubectl apply -f k8s/common.yaml
+                  """)
+              } // stage end
+            }
+            container('helm') {
+              stage('CD - Deploying Helm apps') {
+                sh("""
+                  helm upgrade --install \
+                    --namespace=services \
+                    --values=k8s/services/traefik/helm_values.yaml \
+                    traefik traefik/traefik
+                  """)
+                  sleep(time:15,unit:"SECONDS")
+              } // stage end
+            }
+            container('gcloud') {
+              stage('CD - Deploying Kustomize templates') {
+                sh("kubectl apply -f k8s/services.yaml")
+                sleep(time:30,unit:"SECONDS")
+                sh("kubectl apply -f k8s/apps.yaml")
               } // stage end
             }
           } catch(err) {
