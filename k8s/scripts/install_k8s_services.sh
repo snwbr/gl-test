@@ -33,6 +33,7 @@ $kustomize build $services | kubectl apply -f -
 sleep 90
 kubeseal -f $services/jenkins/ignore.git_ssh_secret.yaml -oyaml > $services/jenkins/base/git-gl-test-ssh.yaml
 kubeseal -f $services/jenkins/ignore.gcp-sa.yaml -oyaml > $services/jenkins/base/gcp-sa.yaml
+kubeseal -f $services/jenkins/ignore.github-app.yaml -oyaml > $services/jenkins/base/github-app.yaml
 
 ## rerunning services as sometimes cert-manager can take a while to register the CRDs
 $kustomize build $services | kubectl apply -f -
@@ -46,5 +47,6 @@ kubectl get secret jenkins-operator-credentials-master -o 'jsonpath={.data.passw
 
 #kubeseal -f services/jenkins/ignore.gcp-sa.yaml -oyaml > services/jenkins/base/gcp-sa.yaml  
 #kubeseal -f services/jenkins/ignore.git_ssh_secret.yaml -oyaml > services/jenkins/base/git-gl-test-ssh.yaml
+#kubeseal -f services/jenkins/ignore.github-app.yaml -oyaml > services/jenkins/base/github-app.yaml
 #### BUSCAR 
 ##java.lang.IllegalArgumentException: Single entry map expected to configure a com.cloudbees.plugins.credentials.Credentials
