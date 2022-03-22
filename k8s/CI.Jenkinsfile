@@ -11,6 +11,7 @@ podTemplate(
   label: ci,
   containers: [
     containerTemplate(name: 'kubeval', image: "garethr/kubeval:0.15.0", ttyEnabled: true, alwaysPullImage: false, command: 'cat'),
+    containerTemplate(name: 'gcloud', image: "google/cloud-sdk:377.0.0", ttyEnabled: true, alwaysPullImage: false, command: 'cat'),
     containerTemplate(name: 'kustomize',image: "k8s.gcr.io/kustomize/kustomize:v3.8.7", ttyEnabled: true, alwaysPullImage: false, command: 'cat'),
   ]
 ) {
@@ -19,7 +20,7 @@ podTemplate(
       ansiColor('xterm') {
         node(ci) {
           try {
-            container('kustomize') {
+            container('gcloud') {
               stage('Git checkout') {
                 checkout scm
                 new_commit = sh(returnStdout: true, script:"git rev-parse --short HEAD").trim()
@@ -32,6 +33,8 @@ podTemplate(
                   """).trim()
                   print "Changed files: ${changed_files.split()}"
               }
+            }
+            container('kustomize') {
               stage('CI - Generate K8s manifests from templates') {
                 when {
                   expression { changed_files != '' }
