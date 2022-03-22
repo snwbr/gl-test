@@ -22,17 +22,32 @@ podTemplate(
             container('kustomize') {
               stage('Git checkout') {
                 checkout scm
+                new_commit = sh(returnStdout: true, script:"git rev-parse --short HEAD").trim()
+                last_commit = sh(returnStdout: true, script:"git rev-parse --short HEAD~1").trim()
+                changed_files = sh(returnStdout: true, script:"""
+                  git diff --no-commit-id --name-only -r ${new_commit} ${last_commit} |
+                  xargs dirname |
+                  sort -u |
+                  xargs -I{} find {} -name "kustomization.yaml" -maxdepth 1
+                  """).trim()
+                  print "Changed files: ${changed_files.split()}"
               }
               stage('CI - Generate K8s manifests from templates') {
+                when {
+                  expression { changed_files != '' }
+                } 
                 dir("k8s"){
-                  for (folder in manifests_folders) {
-                    sh("/app/kustomize build ${folder} > ${folder.replaceAll("/", "-")}.yaml")
+                  for (file in changed_files) {
+                    sh("/app/kustomize build `dirname ${file}` >> ${file.split("/")[0]}.yaml")
                   }
                 }
               } // stage end
             }
             container('kubeval') {
               stage('CI - Validate K8s manifests') {
+                when {
+                  expression { changed_files != '' }
+                }
                 sh("""
                   /kubeval --ignore-missing-schemas k8s/*.yaml
                   """)
