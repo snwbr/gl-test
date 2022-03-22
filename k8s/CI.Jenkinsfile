@@ -1,10 +1,5 @@
 #!/usr/bin/env groovy
 
-def manifests_folders = [
-    "common",
-    "apps/dev",
-    "services",
-] as String[]
 def ci = "tfpod-${UUID.randomUUID().toString()}"
 
 podTemplate(

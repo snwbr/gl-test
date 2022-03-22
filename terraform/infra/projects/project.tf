@@ -22,7 +22,6 @@ module "gcp_project" {
     "compute.googleapis.com",
     "container.googleapis.com",
     "containerfilesystem.googleapis.com",
-    #"containerregistry.googleapis.com",
     "iam.googleapis.com",
     "iamcredentials.googleapis.com",
     #"logging.googleapis.com",
@@ -35,6 +34,7 @@ module "gcp_project" {
     "storage.googleapis.com",
     "domains.googleapis.com",
     "dns.googleapis.com",
+    "containerregistry.googleapis.com",
   ]
   depends_on = [
     time_sleep.wait_10_mins
