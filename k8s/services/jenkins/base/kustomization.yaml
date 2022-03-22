@@ -4,7 +4,7 @@ resources:
 - git-timeoff-ssh.yaml
 - git-gl-test-ssh.yaml
 - github-app.yaml
-- dockerhub_token.yaml
+- dockerhub-token.yaml
 - ingressroute.yaml
 - jenkins_operator.yaml
 - jenkins_instance.yaml
