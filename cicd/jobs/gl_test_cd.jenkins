@@ -1,20 +1,23 @@
 #!/usr/bin/env groovy
 
-multibranchPipelineJob('CD-GL-Test-K8s') {
-  displayName('CD - GL-Test - K8s deployment')
-  description('CD - GL-Test - K8s manifests deployment')
+multibranchPipelineJob('CI-GL-Test-K8s') {
+  displayName('CI - GL-Test - K8s validation')
+  description('CI - GL-Test - K8s manifests validation')
   branchSources {
-    git {
+    github {
       id('010990') // IMPORTANT: use a constant and unique identifier
-      remote('git@github.com:snwbr/gl-test.git')
-      credentialsId('git-gl-test-ssh')
-      includes('*')
+      scanCredentialsId('git-snwbr-app')
+      checkoutCredentialsId('git-gl-test-ssh')
+      repository('gl-test')
+      includes('main')
+      repoOwner('snwbr')
+      buildOriginPRMerge(true)
     }
   }
   orphanedItemStrategy {
     discardOldItems {
-      numToKeep(5)
-      daysToKeep(5)
+      numToKeep(2)
+      daysToKeep(2)
     }
   }
   factory {
