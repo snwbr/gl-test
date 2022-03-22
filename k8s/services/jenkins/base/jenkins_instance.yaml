@@ -49,7 +49,7 @@ spec:
       version: "1583.v18d333ef7379"
     containers:
       - name: jenkins-master
-        image: jenkins/jenkins:2.319.1-lts-alpine
+        image: jenkins/jenkins:2.332.1-lts-alpine
         imagePullPolicy: IfNotPresent
         env:
           - name: JENKINS_OPTS
