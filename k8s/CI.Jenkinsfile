@@ -38,10 +38,12 @@ podTemplate(
               stage('CI - Generate K8s manifests from templates') {
                 when {
                   expression { changed_files != [] }
-                } 
-                dir("k8s"){
-                  for (file in changed_files) {
-                    sh("/app/kustomize build `dirname ${file}` >> ${file.split("/")[0]}.yaml")
+                }
+                steps {
+                  dir("k8s"){
+                    for (file in changed_files) {
+                      sh("/app/kustomize build `dirname ${file}` >> ${file.split("/")[0]}.yaml")
+                    }
                   }
                 }
               } // stage end
@@ -51,9 +53,11 @@ podTemplate(
                 when {
                   expression { changed_files != '' }
                 }
-                sh("""
-                  /kubeval --ignore-missing-schemas k8s/*.yaml
-                  """)
+                steps {
+                  sh("""
+                    /kubeval --ignore-missing-schemas k8s/*.yaml
+                    """)
+                }
               } // stage end
             }
           } catch(err) {
