@@ -1,0 +1,32 @@
+#!/usr/bin/env groovy
+
+multibranchPipelineJob('CD-TimeOffManagement-K8s') {
+  displayName('CD - TimeOffManagement - K8s deployment')
+  description('CD - TimeOffManagement - K8s manifests deployment')
+  branchSources {
+    github {
+      id('120312') // IMPORTANT: use a constant and unique identifier
+      scanCredentialsId('git-snwbr-app')
+      checkoutCredentialsId('git-timeoff-ssh')
+      repository('timeoff-management-application')
+      includes('main')
+      repoOwner('snwbr')
+    }
+  }
+  orphanedItemStrategy {
+    discardOldItems {
+      numToKeep(2)
+      daysToKeep(2)
+    }
+  }
+  factory {
+    workflowBranchProjectFactory {
+      scriptPath('CI.Jenkinsfile')
+    }
+  }
+  triggers {
+    periodicFolderTrigger {
+      interval("1m")
+    }
+  }
+}
