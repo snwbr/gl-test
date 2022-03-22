@@ -26,19 +26,19 @@ spec:
     - name: git
       version: "4.10.0"
     - name: job-dsl
-      version: "1.78.1"
+      version: "1.78.3"
     - name: configuration-as-code
-      version: "1.55"
+      version: "1414.v878271fc496f"
     - name: kubernetes-credentials-provider
       version: "0.20"
     - name: workflow-multibranch
-      version: "706.vd43c65dec013"
+      version: "711.vdfef37cda_816"
     - name: ansicolor
       version: "1.0.1"
     - name: timestamper
       version: "1.17"
     - name: credentials
-      version: "2.6.2"
+      version: "1074.v60e6c29b_b_44b_"
     - name: pipeline-stage-view
       version: "2.22"
     - name: github-checks
@@ -47,6 +47,10 @@ spec:
       version: "1.34.3"
     - name: github-branch-source
       version: "1583.v18d333ef7379"
+    # - name: pipeline-model-extensions
+    #   version: "1.9.3"
+    # - name: pipeline-model-definition
+    #   version: "1.9.3"
     containers:
       - name: jenkins-master
         image: jenkins/jenkins:2.332.1-lts-alpine

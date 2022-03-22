@@ -40,9 +40,8 @@ $kustomize build $services | kubectl apply -f -
 $kustomize build $apps | kubectl apply -f -
 
 sleep 60
-kubectl get secret jenkins-operator-credentials-master -o 'jsonpath={.data.user}' | base64 -d
-echo
-kubectl get secret jenkins-operator-credentials-master -o 'jsonpath={.data.password}' | base64 -d
+echo "JENKINS_USER: $(kubectl get secret jenkins-operator-credentials-master -o 'jsonpath={.data.user}' | base64 -d)"
+echo "JENKINS_PASSWORD: $(kubectl get secret jenkins-operator-credentials-master -o 'jsonpath={.data.password}' | base64 -d)"
 
 
 #kubeseal -f services/jenkins/ignore.gcp-sa.yaml -oyaml > services/jenkins/base/gcp-sa.yaml  
