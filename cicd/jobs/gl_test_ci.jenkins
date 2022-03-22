@@ -10,6 +10,7 @@ multibranchPipelineJob('CI-GL-Test-K8s') {
       checkoutCredentialsId('git-gl-test-ssh')
       repository('git@github.com:snwbr/gl-test.git')
       includes('*')
+      repoOwner('snwbr')
     }
   }
   orphanedItemStrategy {
