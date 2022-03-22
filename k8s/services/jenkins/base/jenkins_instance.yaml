@@ -45,6 +45,8 @@ spec:
       version: "1.0.18"
     - name: github
       version: "1.34.3"
+    - name: github-branch-source
+      version: ""
     containers:
       - name: jenkins-master
         image: jenkins/jenkins:2.319.1-lts-alpine

@@ -30,14 +30,14 @@ podTemplate(
                   xargs dirname |
                   sort -u |
                   xargs -I{} find {} -name "kustomization.yaml" -maxdepth 1
-                  """).trim()
-                  print "Changed files: ${changed_files.split()}"
+                  """).trim().split('\n')
+                  print "Changed files: ${changed_files}"
               }
             }
             container('kustomize') {
               stage('CI - Generate K8s manifests from templates') {
                 when {
-                  expression { changed_files != '' }
+                  expression { changed_files != [] }
                 } 
                 dir("k8s"){
                   for (file in changed_files) {
