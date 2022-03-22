@@ -1,8 +1,8 @@
 #!/usr/bin/env groovy
 
-multibranchPipelineJob('CI-GL-Test-K8s') {
-  displayName('CI - GL-Test - K8s validation')
-  description('CI - GL-Test - K8s manifests validation')
+multibranchPipelineJob('CD-GL-Test-K8s') {
+  displayName('CD - GL-Test - K8s validation')
+  description('CD - GL-Test - K8s manifests validation')
   branchSources {
     github {
       id('010990') // IMPORTANT: use a constant and unique identifier
