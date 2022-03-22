@@ -10,7 +10,6 @@ multibranchPipelineJob('CI-GL-Test-K8s') {
       checkoutCredentialsId('git-gl-test-ssh')
       repository('https://github.com/snwbr/gl-test.git')
       includes('*')
-      repoOwner('snwbr')
       buildOriginPRMerge(true)
     }
   }
