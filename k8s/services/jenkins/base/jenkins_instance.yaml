@@ -45,6 +45,8 @@ spec:
       version: "1.34.3"
     - name: github-branch-source
       version: "1583.v18d333ef7379"
+    - name: docker-workflow
+      version: "1.28"
     # - name: pipeline-model-extensions
     #   version: "1.9.3"
     # - name: pipeline-model-definition
