@@ -1,7 +1,7 @@
 resources:
 - jenkins_crds.yaml
-#- jenkins-operator-user-configuration.yaml
 - gcp-sa.yaml
+- git-timeoff-ssh.yaml
 - git-gl-test-ssh.yaml
 - github-app.yaml
 - ingressroute.yaml
