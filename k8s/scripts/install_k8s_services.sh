@@ -32,6 +32,7 @@ kubectl ns services
 $kustomize build $services | kubectl apply -f -
 sleep 90
 kubeseal -f $services/jenkins/ignore.git_ssh_secret.yaml -oyaml > $services/jenkins/base/git-gl-test-ssh.yaml
+kubeseal -f $services/jenkins/ignore.git_ssh_timeoff_secret.yaml -oyaml > $services/jenkins/base/git-timeoff-ssh.yaml
 kubeseal -f $services/jenkins/ignore.gcp-sa.yaml -oyaml > $services/jenkins/base/gcp-sa.yaml
 kubeseal -f $services/jenkins/ignore.github-app.yaml -oyaml > $services/jenkins/base/github-app.yaml
 
@@ -47,5 +48,6 @@ echo "JENKINS_PASSWORD: $(kubectl get secret jenkins-operator-credentials-master
 #kubeseal -f services/jenkins/ignore.gcp-sa.yaml -oyaml > services/jenkins/base/gcp-sa.yaml  
 #kubeseal -f services/jenkins/ignore.git_ssh_secret.yaml -oyaml > services/jenkins/base/git-gl-test-ssh.yaml
 #kubeseal -f services/jenkins/ignore.github-app.yaml -oyaml > services/jenkins/base/github-app.yaml
+#kubeseal -f services/jenkins/ignore.git_ssh_timeoff_secret.yaml -oyaml > services/jenkins/base/git-timeoff-ssh.yaml
 #### BUSCAR 
 ##java.lang.IllegalArgumentException: Single entry map expected to configure a com.cloudbees.plugins.credentials.Credentials

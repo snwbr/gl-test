@@ -1,0 +1,33 @@
+#!/usr/bin/env groovy
+
+multibranchPipelineJob('CI-TimeOffManagement-K8s') {
+  displayName('CI - TimeOffManagement - K8s validation')
+  description('CI - TimeOffManagement - K8s manifests validation')
+  branchSources {
+    github {
+      id('221117') // IMPORTANT: use a constant and unique identifier
+      scanCredentialsId('git-snwbr-app')
+      checkoutCredentialsId('git-timeoff-ssh')
+      repository('timeoff-management-application')
+      includes('*')
+      repoOwner('snwbr')
+      buildOriginPRMerge(true)
+    }
+  }
+  orphanedItemStrategy {
+    discardOldItems {
+      numToKeep(2)
+      daysToKeep(2)
+    }
+  }
+  factory {
+    workflowBranchProjectFactory {
+      scriptPath('CI.Jenkinsfile')
+    }
+  }
+  triggers {
+    periodicFolderTrigger {
+      interval("1m")
+    }
+  }
+}

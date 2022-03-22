@@ -23,8 +23,13 @@ podTemplate(
             container('gcloud') {
               stage('Git checkout') {
                 checkout scm
-                new_commit = sh(returnStdout: true, script:"git rev-parse --short HEAD").trim()
-                last_commit = sh(returnStdout: true, script:"git rev-parse --short HEAD~1").trim()
+                if (env.BRANCH_NAME.matches("^PR-.*")) {
+                  new_commit = sh(returnStdout: true, script:"git rev-parse --short HEAD~1").trim()
+                  last_commit = sh(returnStdout: true, script:"git rev-parse --short HEAD~2").trim()
+                }else{
+                  new_commit = sh(returnStdout: true, script:"git rev-parse --short HEAD").trim()
+                  last_commit = sh(returnStdout: true, script:"git rev-parse --short HEAD~1").trim()
+                }
                 changed_files = sh(returnStdout: true, script:"""
                   git diff --no-commit-id --name-only -r ${new_commit} ${last_commit} |
                   xargs dirname |

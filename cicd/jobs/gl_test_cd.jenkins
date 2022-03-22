@@ -11,7 +11,6 @@ multibranchPipelineJob('CD-GL-Test-K8s') {
       repository('gl-test')
       includes('main')
       repoOwner('snwbr')
-      buildOriginPRMerge(true)
     }
   }
   orphanedItemStrategy {
