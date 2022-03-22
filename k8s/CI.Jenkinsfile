@@ -30,7 +30,7 @@ podTemplate(
                   xargs dirname |
                   sort -u |
                   xargs -I{} find {} -name "kustomization.yaml" -maxdepth 1
-                  """).trim().split('\n')
+                  """).trim().tokenize('\n')
                   print "Changed files: ${changed_files}"
               }
             }
@@ -39,7 +39,7 @@ podTemplate(
                 if(changed_files.size() > 0) {
                   dir("k8s"){
                     for (file in changed_files) {
-                      sh("/app/kustomize build `dirname ${file}` >> ${file.split("/")[0]}.yaml")
+                      sh("/app/kustomize build ../`dirname ${file}` >> ${file.split("/")[1]}.yaml")
                     }
                   }
                 } else {

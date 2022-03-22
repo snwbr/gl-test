@@ -41,8 +41,6 @@ spec:
       version: "1074.v60e6c29b_b_44b_"
     - name: pipeline-stage-view
       version: "2.22"
-    - name: github-checks
-      version: "1.0.18"
     - name: github
       version: "1.34.3"
     - name: github-branch-source
