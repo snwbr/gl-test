@@ -247,7 +247,7 @@ spec:
         args:
         - --leader-elect
         #image: virtuslab/jenkins-operator:v0.7.0
-        image: virtuslab/jenkins-operator:29c5b1e
+        image: virtuslab/jenkins-operator:49bdf51
         name: jenkins-operator
         imagePullPolicy: IfNotPresent
         securityContext:
