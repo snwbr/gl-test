@@ -24,6 +24,6 @@ multibranchPipelineJob('CI-GL-Test-K8s') {
     }
   }
   triggers {
-    periodic(1)
+    periodic('1')
   }
 }
