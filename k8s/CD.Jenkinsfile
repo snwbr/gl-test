@@ -10,7 +10,7 @@ def ci = "tfpod-${UUID.randomUUID().toString()}"
 podTemplate(
   label: ci,
   containers: [
-    containerTemplate(name: 'kustomize',image: "k8s.gcr.io/kustomize/kustomize:v3.8.7", ttyEnabled: true, alwaysPullImage: false, command: 'cat'),
+    containerTemplate(name: 'kustomize', image: "k8s.gcr.io/kustomize/kustomize:v3.8.7", ttyEnabled: true, alwaysPullImage: false, command: 'cat'),
     containerTemplate(name: 'gcloud', image: "google/cloud-sdk:377.0.0", ttyEnabled: true, alwaysPullImage: false, command: 'cat'),
     containerTemplate(name: 'helm', image: "alpine/helm:3.8.1", ttyEnabled: true, alwaysPullImage: false, command: 'cat')
   ]
@@ -33,15 +33,19 @@ podTemplate(
               } // stage end
             }
             container('gcloud') {
-              stage('CD - Get Google credentials') {
+              stage('CD - Getting Google credentials') {
                 withCredentials([file(credentialsId: 'gcp-sa-key', variable: 'gcp_sa_key')]) {
                   sh('''
                     gcloud auth activate-service-account --key-file=$gcp_sa_key
                     gcloud container clusters get-credentials dev-gke --region us-central1 --project test-snwbr
-                    kubectl apply -f k8s/common.yaml
-                    cp /root/.kube/config .
                     ''')
                 }
+              } // stage end
+              stage('CD - Deploying common K8s manifests') {
+                sh('''
+                  kubectl apply -f k8s/common.yaml
+                  cp /root/.kube/config .
+                  ''')
               } // stage end
             }
             container('helm') {

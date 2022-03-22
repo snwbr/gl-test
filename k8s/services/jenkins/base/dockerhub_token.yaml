@@ -1,0 +1,21 @@
+apiVersion: bitnami.com/v1alpha1
+kind: SealedSecret
+metadata:
+  creationTimestamp: null
+  name: dockerhub_token
+  namespace: services
+spec:
+  encryptedData:
+    text: AgAVcHzsUxolPIhXy2sevTgV/AS5gyPWg8nA3N/yM1GmWDweR1Uhuq+z65zHdqJU1pXZJ9gQ89J33+AND3/JmRKnsWZqKVUvxE9lWapvKYqXWIrQqZpA7zpSJfAcTIau7qSSuxsM86FARHAbpxa0OIIxcaV9WUgGgwIrQG9g12Q+AK4vbtyFaiCVNI9T+l/cFRH9JcsRNs2eYvDximwIFJVPvFBfNEPC4wP30Lk7xQZJsAYWE2HnqpkYEMXcwShDdwstnRWiT1Yp2SjovGr7U2BPxsFhcoH9569nor/IKvgQtANt9X8xCElewRfaCOvqrtQzTAhdd9Zh+WGZ3Fn1T2TF2jbJgvapdbQCcBruGiTYD6/YnVRPFbbK7b441qnkhfH7Mgbv63l5pIDAjPZ3eR85McEghWMGV6pTmZaRAUr8AdgKMSHrjI3Plg/Adq0jrlMqHyDZdC8xIkD+LLPzh+/qEsffg6wWBa/ZMmKQfYwNrVOtYo4NTqMhDFP1Zq5t1KFUgEaI71yT8sY0NXkRELZyM65mm5+Mu1p5xj/I6eO4Y9K2SphCCwsIEkH+aAYK/M65XM6HR5QOePZ7O1xIsSxbK+17MQy5GeG2feNKtdgLHLey1HHCqsactFFjyfBisQD0huF9bE6zfKTXNX+cTlbufqT154WS7jPxtUArej5WSRpuAZjq0AuWmhOt1WD9Sfv3GB1GinLs//LlSuX5FO7k1yZ6ZPGswukCxiyEvwnDKXwGGVs=
+  template:
+    data: null
+    metadata:
+      annotations:
+        jenkins.io/credentials-description: dockerhub_token
+      creationTimestamp: null
+      labels:
+        jenkins.io/credentials-scope: global
+        jenkins.io/credentials-type: secretText
+      name: dockerhub_token
+      namespace: services
+
