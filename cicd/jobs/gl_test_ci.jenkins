@@ -8,7 +8,7 @@ multibranchPipelineJob('CI-GL-Test-K8s') {
       id('120190') // IMPORTANT: use a constant and unique identifier
       scanCredentialsId('git-snwbr-app')
       checkoutCredentialsId('git-gl-test-ssh')
-      repository('gl-test.git')
+      repository('gl-test')
       includes('*')
       repoOwner('snwbr')
       buildOriginPRMerge(true)
