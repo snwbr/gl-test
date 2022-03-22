@@ -24,6 +24,9 @@ multibranchPipelineJob('CI-GL-Test-K8s') {
     }
   }
   triggers {
-    periodic('1')
+    githubPush()
+    periodicFolderTrigger {
+      interval("1")
+    }
   }
 }
