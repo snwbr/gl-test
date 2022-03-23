@@ -3,13 +3,7 @@ kind: ConfigMap
 metadata:
   name: jenkins-operator-user-configuration
 data:
-  1-credentials.yaml: |
-    credentials:
-      system:
-        domainCredentials:
-        - credentials:
-          - file:
-              scope: GLOBAL
-              id: "gcp-sa-key"
-              fileName: "gcp-sa-key"
-              secretBytes: "${base64:${readFile:${gcp-sa-key}}}"
+  1-jenkins.yaml: |
+    unclassified:
+      location:
+        url: https://snwbr.net/jenkins

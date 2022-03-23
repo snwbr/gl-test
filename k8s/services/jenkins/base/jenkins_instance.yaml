@@ -4,8 +4,8 @@ metadata:
   name: master
 spec:
   configurationAsCode:
-    configurations: []
-#      - name: jenkins-operator-user-configuration
+    configurations: 
+      - name: jenkins-operator-user-configuration
     secret:
       name: ""
   groovyScripts:
@@ -80,8 +80,8 @@ spec:
           timeoutSeconds: 1
         resources:
           limits:
-            cpu: 1500m
-            memory: 3Gi
+            cpu: 900m
+            memory: 2Gi
           requests:
             cpu: 100m
             memory: 256Mi
