@@ -16,7 +16,7 @@ spec:
 apiVersion: traefik.containo.us/v1alpha1
 kind: TLSStore
 metadata:
-  name: tlsstore
+  name: default
   namespace: services
 
 spec:
