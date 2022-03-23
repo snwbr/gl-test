@@ -28,7 +28,6 @@ spec:
       ## Default fallback goes to FE
     - match: PathPrefix(`/stats`)
       kind: Rule
-      priority: 1
       services:
       - name: hello-world
         port: 8080
