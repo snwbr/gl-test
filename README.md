@@ -31,7 +31,7 @@ This repo contains the necessary code to deploy the Gorilla Logic DevOps test, w
 - Domain provider: Google Domains
 
 ### High level architecture diagram
-![diagram.svg](diagram.svg)
+![Architecture diagram](diagram.png)
 
 ### Highlights and motivation
 The challenge was split into two different repos:
