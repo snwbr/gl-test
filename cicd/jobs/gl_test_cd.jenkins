@@ -24,4 +24,9 @@ multibranchPipelineJob('CD-GL-Test-K8s') {
       scriptPath('k8s/CD.Jenkinsfile')
     }
   }
+  triggers {
+    periodicFolderTrigger {
+      interval("1m")
+    }
+  }
 }
