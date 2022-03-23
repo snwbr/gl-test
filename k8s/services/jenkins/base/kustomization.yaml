@@ -5,6 +5,7 @@ resources:
 - git-gl-test-ssh.yaml
 - github-app.yaml
 - dockerhub-token.yaml
+- jenkins-operator-user-configuration.yaml
 - ingressroute.yaml
 - jenkins_operator.yaml
 - jenkins_instance.yaml

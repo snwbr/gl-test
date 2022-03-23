@@ -27,7 +27,7 @@ zone                       = "us-central1-c"
 cluster_initial_node_count = 3
 cluster_name               = "gl-challenge"
 gke_version                = "1.21.9-gke.1002"
-machine_type               = "e2-small"
+machine_type               = "e2-medium"
 gke_tags                   = []
 
 ## IAP
