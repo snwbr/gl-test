@@ -10,7 +10,7 @@ spec:
     - ingress.snwbr.net
   secretName: snwbr-net-tls
   issuerRef:
-    name: ingress-staging
+    name: ingress
     kind: ClusterIssuer
 ---
 apiVersion: traefik.containo.us/v1alpha1
