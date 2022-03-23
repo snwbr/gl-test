@@ -36,6 +36,7 @@ kubeseal -f $services/jenkins/ignore.git_ssh_timeoff_secret.yaml -oyaml > $servi
 kubeseal -f $services/jenkins/ignore.gcp-sa.yaml -oyaml > $services/jenkins/base/gcp-sa.yaml
 kubeseal -f $services/jenkins/ignore.github-app.yaml -oyaml > $services/jenkins/base/github-app.yaml
 kubeseal -f $services/jenkins/ignore.dockerhub-token.yaml -oyaml > $services/jenkins/base/dockerhub-token.yaml
+kubeseal -f $services/traefik/base/ignore.basic-auth-secret.yaml -oyaml > $services/traefik/base/basic-auth-secret.yaml
 
 ## rerunning services as sometimes cert-manager can take a while to register the CRDs
 $kustomize build $services | kubectl apply -f -
@@ -51,3 +52,4 @@ echo "JENKINS_PASSWORD: $(kubectl get secret jenkins-operator-credentials-master
 #kubeseal -f services/jenkins/ignore.github-app.yaml -oyaml > services/jenkins/base/github-app.yaml
 #kubeseal -f services/jenkins/ignore.git_ssh_timeoff_secret.yaml -oyaml > services/jenkins/base/git-timeoff-ssh.yaml
 #kubeseal -f services/jenkins/ignore.dockerhub-token.yaml -oyaml > services/jenkins/base/dockerhub-token.yaml
+#kubeseal -f services/traefik/base/ignore.basic-auth-secret.yaml -oyaml > services/traefik/base/basic-auth-secret.yaml
