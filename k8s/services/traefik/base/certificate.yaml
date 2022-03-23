@@ -7,7 +7,18 @@ metadata:
 spec:
   dnsNames:
     - snwbr.net
+    - ingress.snwbr.net
   secretName: snwbr-net-tls
   issuerRef:
-    name: ingress
+    name: ingress-staging
     kind: ClusterIssuer
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: TLSStore
+metadata:
+  name: tlsstore
+  namespace: services
+
+spec:
+  defaultCertificate:
+    secretName: snwbr-net-tls

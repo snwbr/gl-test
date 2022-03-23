@@ -19,3 +19,24 @@ spec:
       selector:
         dnsZones:
         - 'snwbr.net'
+---
+apiVersion: cert-manager.io/v1
+kind: ClusterIssuer
+metadata:
+  name: ingress-staging
+  namespace: cert-manager
+spec:
+  acme:
+    email: oso12_90@hotmail.com
+    server: https://acme-staging-v02.api.letsencrypt.org/directory
+    #disableAccountKeyGeneration: true
+    privateKeySecretRef:
+      name: lets-encrypt-private-key-staging
+      key: private-key
+    solvers:
+    - http01:
+        ingress:
+          class: traefik
+      selector:
+        dnsZones:
+        - 'snwbr.net'
