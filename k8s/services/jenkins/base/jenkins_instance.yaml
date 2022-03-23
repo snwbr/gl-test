@@ -4,8 +4,8 @@ metadata:
   name: master
 spec:
   configurationAsCode:
-    configurations: []
-#      - name: jenkins-operator-user-configuration
+    configurations: 
+      - name: jenkins-operator-user-configuration
     secret:
       name: ""
   groovyScripts:
