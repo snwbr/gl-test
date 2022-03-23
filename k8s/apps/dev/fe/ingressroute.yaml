@@ -26,9 +26,8 @@ spec:
     - websecure
   routes:
       ## Default fallback goes to FE
-    - match: HostRegexp(`snwbr.net`, `{subdomain:[a-z]+}.snwbr.net`)
+    - match: PathPrefix(`/stats`)
       kind: Rule
-      priority: 1
       services:
       - name: hello-world
         port: 8080
