@@ -83,6 +83,7 @@ The main artifacts created by Jenkins are K8s yaml manifests and docker images.
 
 To stick to the challenge request and deliver it on time, a good ammount of good practices were not done, but they're not heavily required for a demo purpose. Still though, they're listed here as things I would improve to this solution:
 
+- Addition of an OAuth or an authentication forward to some authentication service at load balancer or Traefik layers.
 - Addition of proper liveness and readiness probes to K8s deployments (timeoff app is very old and doesn't have healthchecks defined on the JS code).
 - Creation a secret management tool such as Vault.
 - Split Terraform code from K8s into different repositories to be able to manage them through different access controls and strategies.
