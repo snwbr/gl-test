@@ -15,9 +15,9 @@
 ## Summary
 This repo contains the necessary code to deploy the Gorilla Logic DevOps test, which encourages people to use best practices to deploy an application to an environment that's fully automated, scalable, high available and reliable.
 
-**Note:** 
+**Notes:** 
 - Due to the ammount of testing done, using the real Let'sEncrypt server, domain snwbr.net got blocked a couple of times. At the time of reading, sites such as https://snwbr.net/jenkins/ or https://snwbr.net/timeoff/ may present you an invalid cert, that if you check using Chrome, it will show you it's not invalid, but using Let'sEncrypt staging servers (which is the one should be used for development purposes). Real certificates can be enabled by changing `name: ingress-staging` to `name: ingress` in file [certificate.yaml](k8s/services/traefik/base/certificate.yaml), commit, push to `main` and it will be applied by Jenkins.
-- In order to avoid costs associated with having GKE and instances running up, I destroyed the GKE cluster. It can be easily put it back with all the stack in minutes. Please create a [Github issue](https://github.com/snwbr/gl-test/issues/new) saying you want the environment up and I'll create it as soon as I see the issue and reply it back when's done.
+- **IMPORTANT**: In order to avoid costs associated with having GKE and instances running up, I destroyed the GKE cluster. It can be easily put it back with all the stack in minutes. Please create a [Github issue](https://github.com/snwbr/gl-test/issues/new) saying you want the environment up and I'll create it as soon as I see the issue and reply it back when's done.
 
 ## Architecture
 ### Toolset and technologies
@@ -37,7 +37,7 @@ This repo contains the necessary code to deploy the Gorilla Logic DevOps test, w
 
 ### Highlights and motivation
 The challenge was split into two different repos:
-- https://github.com/snwbr/gl-test/ (this repoo) contains all the base code to configure the cloud of chosing, to spin up the environment and handle underlaying objects required for the app to be deployed and run successfully. For details, read the sections below.
+- https://github.com/snwbr/gl-test/ (this repo) contains all the base code to configure the cloud of chosing, to spin up the environment and handle underlaying objects required for the app to be deployed and run successfully. For details, read the sections below.
 - https://github.com/snwbr/timeoff-management-application/ is an actual application to be build, tested and deployed over the environment previously configured.
 
 ## Infrastructure as Code
