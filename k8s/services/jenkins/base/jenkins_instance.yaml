@@ -38,7 +38,7 @@ spec:
     - name: timestamper
       version: "1.17"
     - name: credentials
-      version: "1074.v60e6c29b_b_44b_"
+      version: "1087.v16065d268466"
     - name: pipeline-stage-view
       version: "2.22"
     - name: github
